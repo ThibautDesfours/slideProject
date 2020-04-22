@@ -39,7 +39,7 @@ class PictureEffect
     private $picture;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Slide", mappedBy="picture_effects")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Slide", inversedBy="picture_effects")
      */
     private $slide;
 

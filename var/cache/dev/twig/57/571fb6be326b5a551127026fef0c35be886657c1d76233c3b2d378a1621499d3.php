@@ -48,23 +48,34 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
 <html>
     <head>
         <meta charset=\"UTF-8\">
-        <title>";
+           <link rel=\"stylesheet\" href=\"";
         // line 5
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/css/bootstrap.min.css"), "html", null, true);
+        echo "\">
+           <link rel=\"stylesheet\" href=\"";
+        // line 6
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("/css/jquery.Jcrop.min.css"), "html", null, true);
+        echo "\">
+        <title>";
+        // line 7
         $this->displayBlock('title', $context, $blocks);
         echo "</title>
         ";
-        // line 6
+        // line 8
         $this->displayBlock('stylesheets', $context, $blocks);
-        // line 7
+        // line 9
         echo "    </head>
     <body>
         ";
-        // line 9
-        $this->displayBlock('body', $context, $blocks);
-        // line 10
-        echo "        ";
-        $this->displayBlock('javascripts', $context, $blocks);
         // line 11
+        $this->displayBlock('body', $context, $blocks);
+        // line 12
+        echo "        
+
+        ";
+        // line 14
+        $this->displayBlock('javascripts', $context, $blocks);
+        // line 20
         echo "    </body>
 </html>
 ";
@@ -76,7 +87,7 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
 
     }
 
-    // line 5
+    // line 7
     public function block_title($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -95,7 +106,7 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
 
     }
 
-    // line 6
+    // line 8
     public function block_stylesheets($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -113,7 +124,7 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
 
     }
 
-    // line 9
+    // line 11
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -131,7 +142,7 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
 
     }
 
-    // line 10
+    // line 14
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -141,6 +152,23 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
+        // line 15
+        echo "            <script src=\"";
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/bootstrap.min.js"), "html", null, true);
+        echo "\"></script>
+            <script src=\"";
+        // line 16
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/bootstrap.bundle.min.js"), "html", null, true);
+        echo "\"></script>
+            <script src=\"";
+        // line 17
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/jquery-3.4.1.min.js"), "html", null, true);
+        echo "\"></script>
+            <script src=\"";
+        // line 18
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/jquery.Jcrop.min.js"), "html", null, true);
+        echo "\"></script>
+        ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -154,9 +182,14 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
         return "base.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  135 => 10,  117 => 9,  99 => 6,  80 => 5,  68 => 11,  65 => 10,  63 => 9,  59 => 7,  57 => 6,  53 => 5,  47 => 1,);
+        return array (  169 => 18,  165 => 17,  161 => 16,  156 => 15,  146 => 14,  128 => 11,  110 => 8,  91 => 7,  79 => 20,  77 => 14,  73 => 12,  71 => 11,  67 => 9,  65 => 8,  61 => 7,  57 => 6,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -165,14 +198,23 @@ class __TwigTemplate_8835060e13cb395b9786537c27ffbd3a3144d7c1921b20f43afc2ea34a7
 <html>
     <head>
         <meta charset=\"UTF-8\">
+           <link rel=\"stylesheet\" href=\"{{asset('/css/bootstrap.min.css')}}\">
+           <link rel=\"stylesheet\" href=\"{{asset('/css/jquery.Jcrop.min.css')}}\">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        
+
+        {% block javascripts %}
+            <script src=\"{{asset('js/bootstrap.min.js')}}\"></script>
+            <script src=\"{{asset('js/bootstrap.bundle.min.js')}}\"></script>
+            <script src=\"{{asset('js/jquery-3.4.1.min.js')}}\"></script>
+            <script src=\"{{asset('js/jquery.Jcrop.min.js')}}\"></script>
+        {% endblock %}
     </body>
 </html>
-", "base.html.twig", "C:\\xampp\\htdocs\\slideProject\\templates\\base.html.twig");
+", "base.html.twig", "F:\\Dev\\Symfony\\slideProject\\slideProject\\templates\\base.html.twig");
     }
 }

@@ -4319,17 +4319,17 @@
     },
     {
         "name": "symfony/maker-bundle",
-        "version": "v1.15.1",
-        "version_normalized": "1.15.1.0",
+        "version": "v1.15.0",
+        "version_normalized": "1.15.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/symfony/maker-bundle.git",
-            "reference": "ae95a2b7fa8272e75630c273396097074f23e03f"
+            "reference": "31396f2e61803f0e2debbb43ba5aa21acbc6e15a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/ae95a2b7fa8272e75630c273396097074f23e03f",
-            "reference": "ae95a2b7fa8272e75630c273396097074f23e03f",
+            "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/31396f2e61803f0e2debbb43ba5aa21acbc6e15a",
+            "reference": "31396f2e61803f0e2debbb43ba5aa21acbc6e15a",
             "shasum": ""
         },
         "require": {
@@ -4355,7 +4355,7 @@
             "symfony/security-core": "^3.4|^4.0|^5.0",
             "symfony/yaml": "^3.4|^4.0|^5.0"
         },
-        "time": "2020-04-21T19:17:25+00:00",
+        "time": "2020-04-05T10:50:59+00:00",
         "type": "symfony-bundle",
         "extra": {
             "branch-alias": {

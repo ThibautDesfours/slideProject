@@ -33,7 +33,7 @@ class Slide
     private $removedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\PictureEffect", inversedBy="slide")
+     * @ORM\OneToMany(targetEntity="App\Entity\PictureEffect", mappedBy="slide")
      */
     private $picture_effects;
 

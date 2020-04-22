@@ -51,15 +51,13 @@ final class MakeUser extends AbstractMaker
     private $configUpdater;
 
     private $doctrineHelper;
-    private $entityClassGenerator;
 
-    public function __construct(FileManager $fileManager, UserClassBuilder $userClassBuilder, SecurityConfigUpdater $configUpdater, DoctrineHelper $doctrineHelper, EntityClassGenerator $entityClassGenerator)
+    public function __construct(FileManager $fileManager, UserClassBuilder $userClassBuilder, SecurityConfigUpdater $configUpdater, DoctrineHelper $doctrineHelper)
     {
         $this->fileManager = $fileManager;
         $this->userClassBuilder = $userClassBuilder;
         $this->configUpdater = $configUpdater;
         $this->doctrineHelper = $doctrineHelper;
-        $this->entityClassGenerator = $entityClassGenerator;
     }
 
     public static function getCommandName(): string
@@ -141,7 +139,8 @@ final class MakeUser extends AbstractMaker
 
         // A) Generate the User class
         if ($userClassConfiguration->isEntity()) {
-            $classPath = $this->entityClassGenerator->generateEntityClass(
+            $entityClassGenerator = new EntityClassGenerator($generator, $this->doctrineHelper);
+            $classPath = $entityClassGenerator->generateEntityClass(
                 $userClassNameDetails,
                 false, // api resource
                 $userClassConfiguration->hasPassword() && interface_exists(PasswordUpgraderInterface::class) // security user

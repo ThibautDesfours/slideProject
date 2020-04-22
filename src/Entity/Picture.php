@@ -23,15 +23,16 @@ class Picture
      */
     private $name_picture;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
+     /**
+     * @ORM\Column(type="string", length=255)
      */
-    private $createAt;
+    private $path_picture;
+
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $removedAt;
+    private $createdAt;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\PictureEffect", mappedBy="picture")
@@ -54,6 +55,11 @@ class Picture
         return $this->name_picture;
     }
 
+    public function getPathPicture(): ?string
+    {
+        return $this->path_picture;
+    }
+
     public function setNamePicture(string $name_picture): self
     {
         $this->name_picture = $name_picture;
@@ -61,26 +67,21 @@ class Picture
         return $this;
     }
 
-    public function getCreateAt(): ?\DateTimeInterface
+    public function setPathPicture(string $path_picture): self
     {
-        return $this->createAt;
-    }
-
-    public function setCreateAt(?\DateTimeInterface $createAt): self
-    {
-        $this->createAt = $createAt;
+        $this->path_picture = $path_picture;
 
         return $this;
     }
 
-    public function getRemovedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->removedAt;
+        return $this->createdAt;
     }
 
-    public function setRemovedAt(?\DateTimeInterface $removedAt): self
+    public function setCreatedAt(?\DateTimeInterface $createAt): self
     {
-        $this->removedAt = $removedAt;
+        $this->createdAt = $createAt;
 
         return $this;
     }

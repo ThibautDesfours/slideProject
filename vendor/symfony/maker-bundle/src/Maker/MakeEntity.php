@@ -47,9 +47,8 @@ final class MakeEntity extends AbstractMaker implements InputAwareMakerInterface
     private $fileManager;
     private $doctrineHelper;
     private $generator;
-    private $entityClassGenerator;
 
-    public function __construct(FileManager $fileManager, DoctrineHelper $doctrineHelper, string $projectDirectory, Generator $generator = null, EntityClassGenerator $entityClassGenerator = null)
+    public function __construct(FileManager $fileManager, DoctrineHelper $doctrineHelper, string $projectDirectory, Generator $generator = null)
     {
         $this->fileManager = $fileManager;
         $this->doctrineHelper = $doctrineHelper;
@@ -60,13 +59,6 @@ final class MakeEntity extends AbstractMaker implements InputAwareMakerInterface
             $this->generator = new Generator($fileManager, 'App\\');
         } else {
             $this->generator = $generator;
-        }
-
-        if (null === $entityClassGenerator) {
-            @trigger_error(sprintf('Passing a "%s" instance as 5th argument is mandatory since version 1.15.1', Generator::class), E_USER_DEPRECATED);
-            $this->entityClassGenerator = new EntityClassGenerator($generator, $this->doctrineHelper);
-        } else {
-            $this->entityClassGenerator = $entityClassGenerator;
         }
     }
 
@@ -145,7 +137,8 @@ final class MakeEntity extends AbstractMaker implements InputAwareMakerInterface
 
         $classExists = class_exists($entityClassDetails->getFullName());
         if (!$classExists) {
-            $entityPath = $this->entityClassGenerator->generateEntityClass(
+            $entityClassGenerator = new EntityClassGenerator($generator, $this->doctrineHelper);
+            $entityPath = $entityClassGenerator->generateEntityClass(
                 $entityClassDetails,
                 $input->getOption('api-resource')
             );
@@ -773,7 +766,7 @@ final class MakeEntity extends AbstractMaker implements InputAwareMakerInterface
 
     private function regenerateEntities(string $classOrNamespace, bool $overwrite, Generator $generator)
     {
-        $regenerator = new EntityRegenerator($this->doctrineHelper, $this->fileManager, $generator, $this->entityClassGenerator, $overwrite);
+        $regenerator = new EntityRegenerator($this->doctrineHelper, $this->fileManager, $generator, $overwrite);
         $regenerator->regenerateEntities($classOrNamespace);
     }
 
