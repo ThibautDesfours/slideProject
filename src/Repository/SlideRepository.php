@@ -19,6 +19,20 @@ class SlideRepository extends ServiceEntityRepository
         parent::__construct($registry, Slide::class);
     }
 
+    public function findAllPictures()
+    {
+        return $this->createQueryBuilder('s')
+            ->Select('s.id, s.title_slide,s.createdAt, s.removedAt, p.id as id_picture, p.name_picture, p.createdAt, p.path_picture, pe.start_effect, pe.end_effect, pe.length_effect')
+            ->join('s.picture_effects','pe')
+            ->join('pe.picture','p')
+            ->andWhere('s.removedAt is null')
+            ->orderBy('s.id', 'ASC')
+            ->orderBy('p.id','ASC')
+            ->groupBy('s.id')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Slide[] Returns an array of Slide objects
     //  */

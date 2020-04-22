@@ -13,6 +13,7 @@ class PictureController extends AbstractController
 {
     /**
      * @Route("/index", name="index")
+     * @Route("/", name="/")
      */
     public function index()
     {

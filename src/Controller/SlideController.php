@@ -13,6 +13,20 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SlideController extends AbstractController
 {
+    
+    /**
+     * @Route("/slide", name="slideHome")
+     */
+    public function slide(EntityManagerInterface $em)
+    {
+        $slides = $em ->getRepository(Slide::class)->findAllPictures();
+        
+        return $this->render('slide/slides.html.twig',[
+            'slides' => $slides,
+
+        ]);
+    }
+
     /**
      * @Route("slide/show/{id}", name="slideShow", requirements={"id"="\d+"})
      */

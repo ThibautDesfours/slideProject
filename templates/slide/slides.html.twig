@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Slides{% endblock %}
+
+{% block body %}
+   <div class="container">
+
+		<h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Slides :</h1>
+
+		<hr class="mt-2 mb-5">
+
+		<div class="row text-center text-lg-left">
+            {% for slide in slides %}
+                <div class="col-lg-3 col-md-4 col-6">
+                    <p><h4 class="font-weight-light text-center text-lg-left mt-4 mb-0">{{slide.title_slide}}</h4></p>
+                    <a href="slide/show/{{slide.id}}" class="d-block mb-4 h-60">
+                        <img class="img-fluid img-thumbnail" src="{{asset(slide.path_picture)}}" alt="{{slide.name_picture}}">
+                    </a>      
+                     <h5 class="font-weight-light text-center text-lg-left mt-4 mb-0">Créé le {{slide.createdAt|date("m/d/Y")}}</h5>              
+                </div>
+            {% endfor %}
+	</div>
+{% endblock %}

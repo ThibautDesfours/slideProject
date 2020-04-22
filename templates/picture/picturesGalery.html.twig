@@ -30,7 +30,7 @@
 
 			<div class="col-lg-3 col-md-4 col-6">
 				<a href="#" class="d-block mb-4 h-100">
-					<img class="img-fluid img-thumbnail" src="./pictures/{{ picture.getPathPicture() }}" alt="">
+					<img class="img-fluid img-thumbnail" src="{{asset(picture.getPathPicture())}}" alt="">
 				</a>
 			</div>
         {% endfor %}

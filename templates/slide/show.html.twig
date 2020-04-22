@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{slide.getTitleSlide()}}{% endblock %}
+{% block title %}Slide{% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
+    <div class="container">     
+        <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">{{slide.getTitleSlide()}}</h1>
+
+		<hr class="mt-2 mb-5">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 {% for picture_effect in picture_effects %}
@@ -21,7 +24,10 @@
                     {% else %}
                         <div class="carousel-item">
                     {% endif %}
-                        <img class="d-block w-100" src="{{asset(picture_effect.path_picture)}}" alt="{picture_effect.name_picture}">
+                        <img class="d-block w-100" src="{{asset(picture_effect.path_picture)}}" alt="{{picture_effect.name_picture}}"/>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{picture_effect.name_picture}}</h5>
+                        </div>
                     </div>
                 {% endfor %}
             </div>

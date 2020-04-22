@@ -23,7 +23,7 @@
 			</style>
 		{% endblock %}
 	</head>
-	{% block body %}
+	<body>
 		<div class="example-wrapper">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<a class="navbar-brand" href="#">Générateur de slide</a>
@@ -34,21 +34,23 @@
 							<a class="nav-link" href="/picturesGalery">Accueil</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="/contact">Slide
+							<a class="nav-link" href="/slide">Slide
 							</a>
 						</li>
 					</ul>
 				</div>
 			</nav>
 		</div>
-		<div class="container"></div>
-	{% endblock %}
-
-
-	{% block javascripts %}
-		<script src="{{asset('js/bootstrap.min.js')}}"></script>
-		<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
-		<script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
-		<script src="{{asset('js/jquery.Jcrop.min.js')}}"></script>
-	{% endblock %}
+		<div class="container-fluid">
+			{% block body %}{% endblock %}
+		</div>
+	</body>
+	<footer>
+		{% block javascripts %}
+			<script src="{{asset('js/bootstrap.min.js')}}"></script>
+			<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
+			<script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
+			<script src="{{asset('js/jquery.Jcrop.min.js')}}"></script>
+		{% endblock %}
+	</footer>
 </html>
