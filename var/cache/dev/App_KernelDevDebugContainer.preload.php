@@ -6,7 +6,7 @@
 use Symfony\Component\DependencyInjection\Dumper\Preloader;
 
 require dirname(__DIR__, 3).'\\vendor/autoload.php';
-require __DIR__.'/Container89OSUza/App_KernelDevDebugContainer.php';
+require __DIR__.'/ContainerAYLU4NK/App_KernelDevDebugContainer.php';
 
 $classes = [];
 $classes[] = 'Symfony\Bundle\FrameworkBundle\FrameworkBundle';
@@ -27,6 +27,9 @@ $classes[] = 'Symfony\Component\HttpClient\HttpClient';
 $classes[] = 'Symfony\Bridge\Monolog\Logger';
 $classes[] = 'Symfony\Component\HttpFoundation\RequestMatcher';
 $classes[] = 'Symfony\Component\DependencyInjection\ServiceLocator';
+$classes[] = 'App\Repository\PictureEffectRepository';
+$classes[] = 'App\Repository\PictureRepository';
+$classes[] = 'App\Repository\SlideRepository';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController';
 $classes[] = 'Symfony\Bundle\FrameworkBundle\Controller\TemplateController';
 $classes[] = 'Symfony\Component\Cache\DoctrineProvider';
@@ -244,6 +247,7 @@ $classes[] = 'Symfony\Bundle\MakerBundle\Maker\MakeValidator';
 $classes[] = 'Symfony\Bundle\MakerBundle\Maker\MakeVoter';
 $classes[] = 'Symfony\Bundle\MakerBundle\Event\ConsoleErrorSubscriber';
 $classes[] = 'Symfony\Bundle\MakerBundle\Doctrine\DoctrineHelper';
+$classes[] = 'Symfony\Bundle\MakerBundle\Doctrine\EntityClassGenerator';
 $classes[] = 'Symfony\Bundle\MakerBundle\FileManager';
 $classes[] = 'Symfony\Bundle\MakerBundle\Util\AutoloaderUtil';
 $classes[] = 'Symfony\Bundle\MakerBundle\Util\ComposerAutoloaderFinder';

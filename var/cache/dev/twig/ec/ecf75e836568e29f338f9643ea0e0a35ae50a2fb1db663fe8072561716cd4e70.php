@@ -482,6 +482,6 @@ class __TwigTemplate_452e2b4bef6a7a2ce32f57bf76036ae6ea42774d72152e70887ea64edad
         {% endfor %}
     </table>
 {% endmacro %}
-", "@WebProfiler/Collector/events.html.twig", "F:\\Dev\\GalleriePhoto\\slideProject\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\events.html.twig");
+", "@WebProfiler/Collector/events.html.twig", "C:\\xampp\\htdocs\\slideProject\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\events.html.twig");
     }
 }
