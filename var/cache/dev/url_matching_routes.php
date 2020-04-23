@@ -13,6 +13,9 @@ return [
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/index' => [[['_route' => 'index', '_controller' => 'App\\Controller\\PictureController::index'], null, null, null, false, false, null]],
+        '/picturesGalery' => [[['_route' => 'picturesGalery', '_controller' => 'App\\Controller\\PictureController::show'], null, null, null, false, false, null]],
+        '/new' => [[['_route' => 'newPicture', '_controller' => 'App\\Controller\\PictureController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
