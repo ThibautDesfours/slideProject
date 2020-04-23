@@ -1,7 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Slide{% endblock %}
+{% block stylesheets %}
+    <style>
+        {% for picture_effect in picture_effects %}
+            #img{{loop.index}}{
+                animation: kenburns{{loop.index}} {{picture_effect.length_effect}}s infinite;
+            }
 
+            @keyframes kenburns{{loop.index}} {
+                0% {
+                    opactity: 0;
+                }
+                5% {
+                    opactity: 1;
+                }
+                95% {
+                    transform: scale3d(1.5, 1.5, 1.5) translate3d(-190px,-120px,0px);
+                    animation-timing-function: ease-in;
+                    opactity: 1;
+                }
+                100% {
+                    transform: scale3d(2,2,2) translate3d(-170,-100,0px);
+                    opacity:0; 
+                }
+            }
+        {% endfor %}
+    </style>
+{% endblock %}
 {% block body %}
     <div class="container">     
         <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">{{slide.getTitleSlide()}}</h1>
@@ -24,7 +50,7 @@
                     {% else %}
                         <div class="carousel-item">
                     {% endif %}
-                        <img class="d-block w-100" src="{{asset(picture_effect.path_picture)}}" alt="{{picture_effect.name_picture}}"/>
+                        <img id="img{{loop.index}}" class="d-block w-100" src="{{asset(picture_effect.path_picture)}}" alt="{{picture_effect.name_picture}}"/>
                         <div class="carousel-caption d-none d-md-block">
                             <h5>{{picture_effect.name_picture}}</h5>
                         </div>
@@ -54,7 +80,6 @@
             $('#btnNext').click(function(){
                  $('.carousel').carousel('next');
             });
-
         });
     </script>
 {% endblock %}
