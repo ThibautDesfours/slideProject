@@ -1,28 +1,29 @@
 <?php
+
 namespace App\Form;
 
+use App\Entity\Picture;
 use App\Form\PictureType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 
-class ProductType extends AbstractType
+class PictureFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ...
-            ->add('picture', FileType::class, [
-                'name_picture' => 'Brochure (PDF file)',
+            ->add('name_picture', null, [
+                'required'   => true])
+            ->add('path_picture', FileType::class, [
+                'label' => 'Choisissez une image',
 
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
 
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
-                'required' => false,
+                'required' => true,
 
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes
@@ -30,21 +31,19 @@ class ProductType extends AbstractType
                     new File([
                         'maxSize' => '1024k',
                         'mimeTypes' => [
-                            'application/pdf',
-                            'application/x-pdf',
+                            'image/png',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                        'mimeTypesMessage' => 'TEST',
                     ])
                 ],
             ])
-            // ...
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Product::class,
+            'data_class' => Picture::class,
         ]);
     }
 }
