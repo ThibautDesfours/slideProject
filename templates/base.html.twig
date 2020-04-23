@@ -46,11 +46,10 @@
 		</div>
 	</body>
 	<footer>
-		{% block javascripts %}
-			<script src="{{asset('js/bootstrap.min.js')}}"></script>
-			<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
-			<script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
-			<script src="{{asset('js/jquery.Jcrop.min.js')}}"></script>
-		{% endblock %}
+		<script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
+		<script src="{{asset('js/jquery.Jcrop.min.js')}}"></script>
+		<script src="{{asset('js/bootstrap.min.js')}}"></script>
+		<script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>			
+		{% block javascripts %}		{% endblock %}
 	</footer>
 </html>
