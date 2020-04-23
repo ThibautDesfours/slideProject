@@ -24,14 +24,44 @@ class PictureEffect
     private $length_effect;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
-    private $start_effect;
+    private $x_start;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
-    private $end_effect;
+    private $y_start;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $w_start;
+
+     /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $h_start;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $x_end;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $y_end;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $w_end;
+
+     /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $h_end;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Picture", inversedBy="picture_effects")
@@ -43,10 +73,7 @@ class PictureEffect
      */
     private $slide;
 
-    public function __construct()
-    {
-        $this->slide = new ArrayCollection();
-    }
+    public function __construct(){}
 
     public function getId(): ?int
     {
@@ -65,26 +92,98 @@ class PictureEffect
         return $this;
     }
 
-    public function getStartEffect(): ?string
+    public function getXStart(): ?float
     {
-        return $this->start_effect;
+        return $this->x_start;
     }
 
-    public function setStartEffect(?string $start_effect): self
+    public function getYStart(): ?float
     {
-        $this->start_effect = $start_effect;
+        return $this->y_start;
+    }
+
+    public function getWStart(): ?float
+    {
+        return $this->w_start;
+    }
+
+    public function getHStart(): ?float
+    {
+        return $this->h_start;
+    }
+
+    public function getXEnd(): ?float
+    {
+        return $this->x_end;
+    }
+
+    public function getYEnd(): ?float
+    {
+        return $this->y_end;
+    }
+
+    public function getWEnd(): ?float
+    {
+        return $this->w_end;
+    }
+
+    public function getHEnd(): ?float
+    {
+        return $this->h_end;
+    }
+
+    public function setXStart(?float $x_start): self
+    {
+        $this->x_start = $x_start;
 
         return $this;
     }
 
-    public function getEndEffect(): ?string
+    public function setYStart(?float $y_start): self
     {
-        return $this->end_effect;
+        $this->y_start = $y_start;
+
+        return $this;
     }
 
-    public function setEndEffect(?string $end_effect): self
+    public function setWStart(?float $w_start): self
     {
-        $this->end_effect = $end_effect;
+        $this->w_start = $w_start;
+
+        return $this;
+    }
+
+    public function setHStart(?float $h_start): self
+    {
+        $this->h_start = $h_start;
+
+        return $this;
+    }
+
+    public function setXEnd(?float $x_end): self
+    {
+        $this->x_end = $x_end;
+
+        return $this;
+    }
+
+    public function setYEnd(?float $y_end): self
+    {
+        $this->y_end = $y_end;
+
+        return $this;
+    }
+
+    public function setWEnd(?float $w_end): self
+    {
+        $this->w_end = $w_end;
+
+        return $this;
+    }
+
+    public function setHEnd(?float $h_end): self
+    {
+        $this->h_end = $h_end;
 
         return $this;
     }
@@ -101,33 +200,14 @@ class PictureEffect
         return $this;
     }
 
-    /**
-     * @return Collection|Slide[]
-     */
     public function getSlide(): Collection
     {
         return $this->slide;
     }
 
-    public function addSlide(Slide $slide): self
+    public function setSlide(?Slide $slide): self
     {
-        if (!$this->slide->contains($slide)) {
-            $this->slide[] = $slide;
-            $slide->setPictureEffects($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSlide(Slide $slide): self
-    {
-        if ($this->slide->contains($slide)) {
-            $this->slide->removeElement($slide);
-            // set the owning side to null (unless already changed)
-            if ($slide->getPictureEffects() === $this) {
-                $slide->setPictureEffects(null);
-            }
-        }
+        $this->slide = $slide;
 
         return $this;
     }

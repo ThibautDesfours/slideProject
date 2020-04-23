@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Entity\PictureEffect;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SlideRepository")
@@ -36,6 +38,11 @@ class Slide
      * @ORM\OneToMany(targetEntity="App\Entity\PictureEffect", mappedBy="slide")
      */
     private $picture_effects;
+
+    public function __construct()
+    {
+        $this->picture_effects = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -78,14 +85,27 @@ class Slide
         return $this;
     }
 
-    public function getPictureEffects(): ?PictureEffect
+    
+
+    public function addPictureEffect(PictureEffect $pictureEffect): self
     {
-        return $this->picture_effects;
+        if (!$this->picture_effects->contains($pictureEffect)) {
+            $this->picture_effects[] = $pictureEffect;
+            $pictureEffect->setSlide($this);
+        }
+
+        return $this;
     }
 
-    public function setPictureEffects(?PictureEffect $picture_effects): self
+    public function removePictureEffect(PictureEffect $pictureEffect): self
     {
-        $this->picture_effects = $picture_effects;
+        if ($this->picture_effects->contains($pictureEffect)) {
+            $this->picture_effects->removeElement($pictureEffect);
+            // set the owning side to null (unless already changed)
+            if ($pictureEffect->getSlide() === $this) {
+                $pictureEffect->setSlide(null);
+            }
+        }
 
         return $this;
     }
