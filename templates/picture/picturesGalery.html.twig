@@ -22,29 +22,35 @@
 
 		<hr class="mt-2 mb-5">
 
-		<div class="row text-center text-lg-left">
-        {% for picture in pictures %}
-            
-        
 
+		<div
+			class="row text-center text-lg-left">
+			<!-- Button trigger modal -->
 			<div class="col-lg-3 col-md-4 col-6">
-				<a href="#" class="d-block mb-4 h-100">
-					<img class="img-fluid img-thumbnail" src="{{asset(picture.getPathPicture())}}" alt="">
+				<a data-target="{{path('newPicture')}}" class="tooltipped modal-trigger btn right-align d-block mb-4 h-60" data-tooltip="show" href="#modal1">
+					<img class="img-fluid img-thumbnail" src="{{asset('/pictures/icons/add.png')}}" alt="Ajouter une nouvelle photo">
 				</a>
 			</div>
 
-			<!-- Button trigger modal -->
-			<button type="button" class="tooltipped modal-trigger btn btn-primary" data-tooltip="show" data-target="{{path('newPicture')}}" href="#modal1">
-				Ajouter une pièce jointe
-			</button>
+			{% for picture in pictures %}
+
+
+				<div class="col-lg-3 col-md-4 col-6">
+					<a href="#" class="d-block mb-4 h-100">
+						<img class="img-fluid img-thumbnail" src="{{asset(picture.getPathPicture())}}" alt="">
+					</a>
+				</div>
+			{% endfor %}
+
 
 			<!-- Modal -->
 			<div id="modal1" class="modal">
 				<div class="modal-dialog" role="document">
-					<div class="modal-content" ></div>
-					
+					<div class="modal-content"></div>
+
 				</div>
 			</div>
+
 		</div>
 	</body>
 {% endblock %}
