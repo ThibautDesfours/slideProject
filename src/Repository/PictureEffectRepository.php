@@ -21,15 +21,6 @@ class PictureEffectRepository extends ServiceEntityRepository
 
     public function findBySlide($id)
     {
-       /* return $this->createQueryBuilder('pe')
-            ->addSelect('p')
-            ->join('pe.picture','p')
-            ->andWhere('pe.slide = :slide_id')
-            ->setParameter('slide_id', $id)
-            ->orderBy('pe.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;*/
         return $this->createQueryBuilder('pe')
             ->Select('p.id, p.name_picture, p.createdAt, p.path_picture, pe.start_effect, pe.end_effect, pe.length_effect')
             ->join('pe.picture','p')

@@ -25,7 +25,7 @@ class Slide
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $createAt;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -54,14 +54,14 @@ class Slide
         return $this;
     }
 
-    public function getCreateAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->createAt;
+        return $this->createdAt;
     }
 
-    public function setCreateAt(?\DateTimeInterface $createAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
-        $this->createAt = $createAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

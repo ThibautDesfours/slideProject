@@ -3,38 +3,34 @@
 {% block title %}Galeries photos
 {% endblock %}
 {% block body %}
-	<body>
-		<style>
-			.example-wrapper {
-				margin: 1em auto;
-				max-width: 800px;
-				width: 95%;
-				font: 18px / 1.5 sans-serif;
-			}
-			.example-wrapper code {
-				background: #F5F5F5;
-				padding: 2px 6px;
-			}
-		</style>
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
 
-		<div class="container">
+	<div class="container">
 
-			<h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Galeries photos</h1>
+		<h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Galeries photos</h1>
 
-			<hr class="mt-2 mb-5">
+		<hr class="mt-2 mb-5">
 
-			<div class="row text-center text-lg-left">
-				{% for picture in pictures %}
+		<div class="row text-center text-lg-left">
+        {% for picture in pictures %}
+            
+        
 
-
-					<div class="col-lg-3 col-md-4 col-6">
-						<a href="#" class="d-block mb-4 h-100">
-							<img class="img-fluid img-thumbnail" name="{{picture.getNamePicture()}}" src="./pictures/{{ picture.getPathPicture() }}" alt="">
-						</a>
-					</div>
-				{% endfor %}
-
-
+			<div class="col-lg-3 col-md-4 col-6">
+				<a href="#" class="d-block mb-4 h-100">
+					<img class="img-fluid img-thumbnail" src="{{asset(picture.getPathPicture())}}" alt="">
+				</a>
 			</div>
 
 			<!-- Button trigger modal -->
