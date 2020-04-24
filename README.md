@@ -17,12 +17,13 @@
       - consultation des différents slides
       - visualisation des slides en cliquant dessus
       - création de slide en cliquant sur le + bleu
+      - suppression des slides avec l'icone corbeille sur l'écran de visualisation
       
  # Fonctionnalités à venir :
    - A partir de la route /slide:
-      - suppression des slides et des effets associés
       - amélioration du système pour la création de l'effet Ken Burns lors la création d'une slide
       - amélioration de l'effet Ken Burns lors de la visualisation des slides
+   - Amélioration du css
    
 
 
