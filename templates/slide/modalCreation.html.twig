@@ -4,10 +4,13 @@
 		<span aria-hidden="true">&times;</span>
 	</button>
 </div>
-{{ form_start(formSlide, {'action': path('slideNew')}) }}
-{{form_row(formSlide.title_slide)}}
-<div class="modal-footer">
-	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	<button type="submit" class="btn btn-primary">Créer</button>
+<div class="container">
+    {{ form_start(formSlide, {'action': path('slideNew')}) }}
+        {{form_row(formSlide.title_slide)}}
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Créer</button>
+    </div>
+    {{form_end(formSlide)}}
 </div>
-{{form_end(formSlide)}}
+

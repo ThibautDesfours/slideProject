@@ -4,8 +4,13 @@
 {% block stylesheets %}
     <style>
         {% for picture_effect in picture_effects %}
+            #imgContainer{{loop.index}}{
+                width:{{picture_effect.w_start}}px;
+                height:{{picture_effect.h_start}}px;
+                overflow:hidden;
+            }
             #img{{loop.index}}{
-                animation: kenburns{{loop.index}} {{picture_effect.length_effect}}s infinite;
+                animation: kenburns{{loop.index}} {{picture_effect.length_effect}}s infinite;                
             }
 
             @keyframes kenburns{{loop.index}} {
@@ -21,7 +26,7 @@
                     opactity: 1;
                 }
                 100% {
-                    transform: scale3d(2,2,2) translate3d(-170,-100,0px);
+                    transform: scale3d(2,2,2) translate3d(-170px,-100px,0px);
                     opacity:0; 
                 }
             }
@@ -46,11 +51,11 @@
             <div class="carousel-inner">
                 {% for picture_effect in picture_effects %}
                     {% if loop.first %}
-                        <div class="carousel-item active">
+                        <div class="carousel-item active" id="imgContainer{{loop.index}}">
                     {% else %}
-                        <div class="carousel-item">
+                        <div class="carousel-item" id="imgContainer{{loop.index}}">
                     {% endif %}
-                        <img id="img{{loop.index}}" class="d-block w-100" src="{{asset(picture_effect.path_picture)}}" alt="{{picture_effect.name_picture}}"/>
+                        <img id="img{{loop.index}}" class="d-block w-100" src="../../pictures/{{picture_effect.path_picture}}" alt="{{picture_effect.name_picture}}"/>
                         <div class="carousel-caption d-none d-md-block">
                             <h5>{{picture_effect.name_picture}}</h5>
                         </div>

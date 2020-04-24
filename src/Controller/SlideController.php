@@ -6,6 +6,7 @@ use App\Entity\Slide;
 use App\Entity\Picture;
 use App\Form\SlideType;
 use App\Entity\PictureEffect;
+use App\Form\PictureEffectType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -76,15 +77,32 @@ class SlideController extends AbstractController
     /**
      * @Route("slide/add/{id}", name="slideAdd", requirements={"id"="\d+"})
      */
-    public function AddPcitures(int $id, EntityManagerInterface $em):Response
+    public function AddPictures(PictureEffect $picture_effect = null,  int $picture_id = null, int $id, Request $request, EntityManagerInterface $em):Response
     {
+        if(!$picture_effect){
+            $picture_effect = new PictureEffect();
+        }
         $slide = $em ->getRepository(Slide::class)->find($id);
+        $pictures = $em ->getRepository(Picture::class)->findAll();
         if($slide === null)
             throw new NotFoundHttpException();
 
+        $form = $this->createForm(PictureEffectType::class, $picture_effect);
+        $form ->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){            
+            $picture_effect->setSlide($slide);
+            $picture_effect->setPicture($em ->getRepository(Picture::class)->find($id));
+            $em->persist($picture_effect);
+            $em->flush();
+
+            return $this->redirectToRoute('slideAdd',['id'=>$slide->getId()]);
+        }
+
         return $this->render('slide/add.html.twig',[
             'slide' => $slide,
-
+            'pictures' => $pictures,
+            'formEffect'=> $form->createView(),
         ]);
     }
 }
