@@ -7,7 +7,7 @@
         <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">{{slide.getTitleSlide()}}</h1>
         <h4 id="subTitle" class="font-weight-light text-center text-lg-left mt-4 mb-0">Choisissez une image à ajouter</h4>
         <hr class="mt-2 mb-5">
-        <div id="divAddPicture" class="col-lg-3 col-md-4 col-6">
+        <div id="divAddPicture">
             <img id="imgEdit"/>
             <p>
                 <button id="valid" type="button" class="btn btn-primary" onclick="validZone();">Valider la zone de départ</button>
@@ -37,7 +37,6 @@
                 $('#subTitle').text('Veuillez paraméter l\'image afin de l\'ajouter à la slide : ZONE DE FIN et TEMPS DE L\'ANIMATION');
                 $('#valid').remove();
                 $('#formEffect').show();
-
             }
         }
 
@@ -55,20 +54,21 @@
                 $('#picture_effect_w_end').attr('value',c.w);
                 $('#picture_effect_h_end').attr('value',c.h);
             }
-
         };
+
         $(document).ready(function(){
             $('#divAddPicture').hide();
             $('.img').click(function(){
-                $('#picture_effect_picture').attr('value',$(this).prop('id'))
+                $('#picture_effect_picture_id').attr('value',$(this).prop('id'))
+                $('#subTitle').text('Veuillez paraméter l\'image afin de l\'ajouter à la slide : ZONE DE DÉPART');
+                $('#divAddPicture').show();
+                $('#imgEdit').css('width','100%');
                 $('#imgEdit').prop('src',$(this).prop('src'));
                 $('#imgEdit').prop('alt',$(this).prop('alt'));
                 $('#imgEdit').Jcrop({
                     onSelect: showCoords,
                     onChange: showCoords
                 });
-                $('#subTitle').text('Veuillez paraméter l\'image afin de l\'ajouter à la slide : ZONE DE DÉPART');
-                $('#divAddPicture').show();
                 $('#formEffect').hide();
                 $('.gallery').hide();            
             });
