@@ -11,8 +11,10 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Service\FileUploader;
 use App\Entity\Picture;
 use App\Form\PictureFormType;
+use Symfony\Component\Filesystem\Filesystem;
 
 class PictureController extends AbstractController
 {
@@ -89,55 +91,42 @@ class PictureController extends AbstractController
         ]);
     }
 
-    //TODO 
+    
     /**
-    * @Route("/delete", name="deletePicture")
+    * @Route("/delete/{id}", name="deletePicture", requirements={"id"="\d+"})
     */
-    public function delete(Picture $picture = null, Request $request, SluggerInterface $slugger, EntityManagerInterface $manager)
+    public function delete(int $id, EntityManagerInterface $em, SluggerInterface $slugger, Request $request):Response
+
     {
-        $picture = new Picture();
-        $form = $this->createForm(PictureFormType::class, $picture);
-        $form->handleRequest($request);
+        $filesystem = new Filesystem();
 
+        $picture = $em ->getRepository(Picture::class)->find($id);
+       
+        $pictureFile = $picture->getPathPicture();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $filesystem->remove('./pictures/'.$pictureFile);
+        
+        $em->remove($picture);
+        $em->flush();
 
-            /** @var UploadedFile $pictureFile */
-            $pictureFile = $form->get('path_picture')->getData();
+        
 
-            if ($pictureFile) {
-                $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$pictureFile->guessExtension();
+        return $this->redirectToRoute('picturesGalery');
+    }
 
-                // Move the file to the directory where brochures are stored
-                try {
-                    $pictureFile->move(
-                        $this->getParameter('pictures_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
+    /**
+    * @Route("/showPicture/{id}", name="showPicture", requirements={"id"="\d+"})
+    */
+    public function showPicture(int $id, EntityManagerInterface $em):Response
+    {
+        $picture = $em ->getRepository(Picture::class)->find($id);
+        
 
-                $picture->setPathPicture($newFilename);
-            }
-
-            if(!$picture->getId()){
-                $picture->setCreatedAt(new \Datetime());
-            }
-
-            $manager->persist($picture);
-            $manager->flush();
-
-            return $this->redirectToRoute('picturesGalery');
-        }
-
-        return $this->render('picture/pictureModal.html.twig', [
-            'form' => $form->createView(),
+        return $this->render('picture/pictureModalDelete.html.twig', [
             'picture' => $picture
         ]);
     }
+
 
     /**
      * @return string

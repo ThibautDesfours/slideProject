@@ -37,7 +37,7 @@ class Picture
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\PictureEffect", mappedBy="picture")
+     * @ORM\OneToMany(targetEntity="App\Entity\PictureEffect", mappedBy="picture", cascade={"remove"})
      */
     private $picture_effects;
 
