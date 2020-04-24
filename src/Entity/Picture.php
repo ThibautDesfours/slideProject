@@ -119,5 +119,14 @@ class Picture
         return $this;
     }
 
+    /*public function removePicture(Picture $picture): self
+    {
+        if(!$this->picture_effects->contains($picture)){
+            $this->picture->removeElement($picture);
+        }
+
+        return $this;
+    }*/
+
 
 }

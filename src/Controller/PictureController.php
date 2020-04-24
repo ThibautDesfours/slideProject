@@ -41,15 +41,13 @@ class PictureController extends AbstractController
     }
 
     /**
-    * @Route("/new", name="newPicture", methods="GET|POST")
+    * @Route("/new", name="newPicture")
     */
-    public function new(Request $request, SluggerInterface $slugger)
+    public function new(Picture $picture = null, Request $request, SluggerInterface $slugger, EntityManagerInterface $manager)
     {
         $picture = new Picture();
         $form = $this->createForm(PictureFormType::class, $picture);
         $form->handleRequest($request);
-
-       
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -75,13 +73,19 @@ class PictureController extends AbstractController
                 $picture->setPathPicture($newFilename);
             }
 
-            return $this->render('picture/pictureModal.html.twig', [
-                'form' => $form->createView()
-            ]);
+            if(!$picture->getId()){
+                $picture->setCreatedAt(new \Datetime());
+            }
+
+            $manager->persist($picture);
+            $manager->flush();
+
+            return $this->redirectToRoute('picturesGalery');
         }
 
         return $this->render('picture/pictureModal.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'picture' => $picture
         ]);
     }
 
@@ -94,4 +98,6 @@ class PictureController extends AbstractController
         // uniqid(), which is based on timestamps
         return md5(uniqid());
     }
+
+    
 }

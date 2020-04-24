@@ -8,6 +8,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Mime\MimeTypes;
 use Symfony\Component\Validator\Constraints\File;
 
 class PictureFormType extends AbstractType
@@ -23,7 +24,7 @@ class PictureFormType extends AbstractType
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
 
-                'required' => true,
+                'required' => false,
 
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes
@@ -32,6 +33,9 @@ class PictureFormType extends AbstractType
                         'maxSize' => '1024k',
                         'mimeTypes' => [
                             'image/png',
+                            'image/jpeg',
+                            'image/gif',
+                            'image/webp'
                         ],
                         'mimeTypesMessage' => 'TEST',
                     ])
