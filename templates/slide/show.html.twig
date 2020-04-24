@@ -4,12 +4,15 @@
 {% block stylesheets %}
     <style>
         {% for picture_effect in picture_effects %}
-            #imgContainer{{loop.index}}{
-                width:{{picture_effect.w_start}}px;
-                height:{{picture_effect.h_start}}px;
-                overflow:hidden;
+           
+            #imgContainer{{loop.index}} img{
+                position:relative;
+                left:-{{picture_effect.x_start}}px;
+                top:-{{picture_effect.y_start}}px;
             }
+
             #img{{loop.index}}{
+                overflow:hidden;
                 animation: kenburns{{loop.index}} {{picture_effect.length_effect}}s infinite;                
             }
 
@@ -20,13 +23,8 @@
                 5% {
                     opactity: 1;
                 }
-                95% {
-                    transform: scale3d(1.5, 1.5, 1.5) translate3d(-190px,-120px,0px);
-                    animation-timing-function: ease-in;
-                    opactity: 1;
-                }
                 100% {
-                    transform: scale3d(2,2,2) translate3d(-170px,-100px,0px);
+                    transform: scale3d({{picture_effect.w_start/picture_effect.w_end}},{{picture_effect.h_start/picture_effect.h_end}},0) translate3d({{picture_effect.x_start - picture_effect.x_end}}px,{{picture_effect.y_start - picture_effect.y_end}}px,0px);
                     opacity:0; 
                 }
             }
@@ -51,15 +49,17 @@
             <div class="carousel-inner">
                 {% for picture_effect in picture_effects %}
                     {% if loop.first %}
-                        <div class="carousel-item active" id="imgContainer{{loop.index}}">
+                        <div class="carousel-item active">
                     {% else %}
-                        <div class="carousel-item" id="imgContainer{{loop.index}}">
+                        <div class="carousel-item">
                     {% endif %}
-                        <img id="img{{loop.index}}" class="d-block w-100" src="../../pictures/{{picture_effect.path_picture}}" alt="{{picture_effect.name_picture}}"/>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>{{picture_effect.name_picture}}</h5>
+                            <div id="imgContainer{{loop.index}}">  
+                                <img id="img{{loop.index}}" class="d-block w-100" src="../../pictures/{{picture_effect.path_picture}}" alt="{{picture_effect.name_picture}}"/>
+                            </div>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>{{picture_effect.name_picture}}</h5>
+                            </div>
                         </div>
-                    </div>
                 {% endfor %}
             </div>
             <a class="carousel-control-prev" id="btnPrev" role="button" data-slide="prev">

@@ -77,7 +77,7 @@ class SlideController extends AbstractController
     /**
      * @Route("slide/add/{id}", name="slideAdd", requirements={"id"="\d+"})
      */
-    public function AddPictures(PictureEffect $picture_effect = null,  int $picture_id = null, int $id, Request $request, EntityManagerInterface $em):Response
+    public function AddPictures(PictureEffect $picture_effect = null, int $id, Request $request, EntityManagerInterface $em):Response
     {
         if(!$picture_effect){
             $picture_effect = new PictureEffect();
@@ -92,7 +92,7 @@ class SlideController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){            
             $picture_effect->setSlide($slide);
-            $picture_effect->setPicture($em ->getRepository(Picture::class)->find($id));
+            $picture_effect->setPicture($em ->getRepository(Picture::class)->find($form->get('picture_id')->getData()));
             $em->persist($picture_effect);
             $em->flush();
 
