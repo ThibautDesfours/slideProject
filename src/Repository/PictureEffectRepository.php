@@ -30,6 +30,15 @@ class PictureEffectRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function findBySlideId($id)
+    {
+        return $this->createQueryBuilder('pe')
+            ->andWhere('pe.slide = :slide_id')
+            ->setParameter('slide_id', $id)
+            ->getQuery()
+            ->getResult();
+    }
     
     // /**
     //  * @return PictureEffect[] Returns an array of PictureEffect objects
