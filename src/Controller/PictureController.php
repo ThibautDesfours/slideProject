@@ -89,6 +89,56 @@ class PictureController extends AbstractController
         ]);
     }
 
+    //TODO 
+    /**
+    * @Route("/delete", name="deletePicture")
+    */
+    public function delete(Picture $picture = null, Request $request, SluggerInterface $slugger, EntityManagerInterface $manager)
+    {
+        $picture = new Picture();
+        $form = $this->createForm(PictureFormType::class, $picture);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $pictureFile */
+            $pictureFile = $form->get('path_picture')->getData();
+
+            if ($pictureFile) {
+                $originalFilename = pathinfo($pictureFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$pictureFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $pictureFile->move(
+                        $this->getParameter('pictures_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                $picture->setPathPicture($newFilename);
+            }
+
+            if(!$picture->getId()){
+                $picture->setCreatedAt(new \Datetime());
+            }
+
+            $manager->persist($picture);
+            $manager->flush();
+
+            return $this->redirectToRoute('picturesGalery');
+        }
+
+        return $this->render('picture/pictureModal.html.twig', [
+            'form' => $form->createView(),
+            'picture' => $picture
+        ]);
+    }
+
     /**
      * @return string
      */
