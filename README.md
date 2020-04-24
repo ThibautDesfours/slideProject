@@ -8,7 +8,7 @@
   - Dans le projet faire un "composer require symfony/web-server-bundle --dev" ou un "composer require symfony/web-server-bundle --dev ^4.4.2" si testé avec synfony 5
   - Créer la base de données "slideproject" dans un phpmyadmin à l'aide du script présent dans le répertoire "public/database"
   
-# Fonctionnalités disponnibles :
+# Fonctionnalités disponibles :
   - A partir de la route /picturesGalery : 
       - consultation des images
       - ajout des images à l'aide du + bleu
