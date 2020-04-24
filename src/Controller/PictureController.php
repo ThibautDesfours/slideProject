@@ -11,8 +11,10 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use App\Service\FileUploader;
 use App\Entity\Picture;
 use App\Form\PictureFormType;
+use Symfony\Component\Filesystem\Filesystem;
 
 class PictureController extends AbstractController
 {
@@ -88,6 +90,43 @@ class PictureController extends AbstractController
             'picture' => $picture
         ]);
     }
+
+    
+    /**
+    * @Route("/delete/{id}", name="deletePicture", requirements={"id"="\d+"})
+    */
+    public function delete(int $id, EntityManagerInterface $em, SluggerInterface $slugger, Request $request):Response
+
+    {
+        $filesystem = new Filesystem();
+
+        $picture = $em ->getRepository(Picture::class)->find($id);
+       
+        $pictureFile = $picture->getPathPicture();
+
+        $filesystem->remove('./pictures/'.$pictureFile);
+        
+        $em->remove($picture);
+        $em->flush();
+
+        
+
+        return $this->redirectToRoute('picturesGalery');
+    }
+
+    /**
+    * @Route("/showPicture/{id}", name="showPicture", requirements={"id"="\d+"})
+    */
+    public function showPicture(int $id, EntityManagerInterface $em):Response
+    {
+        $picture = $em ->getRepository(Picture::class)->find($id);
+        
+
+        return $this->render('picture/pictureModalDelete.html.twig', [
+            'picture' => $picture
+        ]);
+    }
+
 
     /**
      * @return string
