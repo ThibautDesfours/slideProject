@@ -7,13 +7,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class PictureEffectType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('length_effect')
+            ->add('length_effect',NumberType::class,['label'=>"Durée de l'effet Ken Burns (en s)"])
             ->add('x_start',HiddenType::class)
             ->add('y_start',HiddenType::class)
             ->add('w_start',HiddenType::class)

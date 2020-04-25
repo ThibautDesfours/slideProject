@@ -9,9 +9,6 @@
         <hr class="mt-2 mb-5">
         <div id="divAddPicture">
             <img id="imgEdit"/>
-            <p>
-                <button id="valid" type="button" class="btn btn-primary" onclick="validZone();">Valider la zone de départ</button>
-            </p>
             {{ form_start(formEffect, {'action': path('slideAdd', { 'id': slide.id })}) }}
                 {{form_row(formEffect.length_effect)}}
                 <button type="submit" class="btn btn-primary">Créer</button>
@@ -32,45 +29,63 @@
 {% endblock %}
 {% block javascripts %}
     <script>
-        function validZone(){
-            if(!document.getElementById('picture_effect_x_end').value){
-                $('#subTitle').text('Veuillez paraméter l\'image afin de l\'ajouter à la slide : ZONE DE FIN et TEMPS DE L\'ANIMATION');
-                $('#valid').remove();
-                $('#formEffect').show();
-            }
-        }
-
-        function showCoords(c)
-        {
-            if(document.getElementById('valid')){
-                $('#picture_effect_x_start').attr('value',c.x);
-                $('#picture_effect_y_start').attr('value',c.y);
-                $('#picture_effect_w_start').attr('value',c.w);
-                $('#picture_effect_h_start').attr('value',c.h);
-            }
-            else{
-                $('#picture_effect_x_end').attr('value',c.x);
-                $('#picture_effect_y_end').attr('value',c.y);
-                $('#picture_effect_w_end').attr('value',c.w);
-                $('#picture_effect_h_end').attr('value',c.h);
-            }
-        };
-
         $(document).ready(function(){
             $('#divAddPicture').hide();
             $('.img').click(function(){
                 $('#picture_effect_picture_id').attr('value',$(this).prop('id'))
-                $('#subTitle').text('Veuillez paraméter l\'image afin de l\'ajouter à la slide : ZONE DE DÉPART');
+                $('#subTitle').text('Veuillez paraméter la zone de départ, la zone de fin et la durée de l\'effet Ken Burns à appliquer');
                 $('#divAddPicture').show();
                 $('#imgEdit').css('width','100%');
                 $('#imgEdit').prop('src',$(this).prop('src'));
                 $('#imgEdit').prop('alt',$(this).prop('alt'));
-                $('#imgEdit').Jcrop({
-                    onSelect: showCoords,
-                    onChange: showCoords
+                $('.gallery').hide();
+
+                var x_start = parseFloat($('#imgEdit').css('width').substring(0, $('#imgEdit').css('width').length-2)*0.05);
+                var y_start = parseFloat($('#imgEdit').css('height').substring(0, $('#imgEdit').css('height').length-2)*0.05);
+                var w_start = parseFloat($('#imgEdit').css('width').substring(0, $('#imgEdit').css('width').length-2)*0.90);
+                var h_start = parseFloat($('#imgEdit').css('height').substring(0, $('#imgEdit').css('height').length-2)*0.90);
+
+                $('#picture_effect_x_start').attr('value',x_start);
+                $('#picture_effect_y_start').attr('value',y_start);
+                $('#picture_effect_w_start').attr('value',w_start);
+                $('#picture_effect_h_start').attr('value',h_start);
+
+                var x_end = parseFloat($('#imgEdit').css('width').substring(0, $('#imgEdit').css('width').length-2)*0.30);
+                var y_end = parseFloat($('#imgEdit').css('height').substring(0, $('#imgEdit').css('height').length-2)*0.30);
+                var w_end = parseFloat($('#imgEdit').css('width').substring(0, $('#imgEdit').css('width').length-2)*0.40);
+                var h_end = parseFloat($('#imgEdit').css('height').substring(0, $('#imgEdit').css('height').length-2)*0.40);
+                
+                $('#picture_effect_x_end').attr('value',x_end);
+                $('#picture_effect_y_end').attr('value',y_end);
+                $('#picture_effect_w_end').attr('value',w_end);
+                $('#picture_effect_h_end').attr('value',w_end);
+                
+                const jcrop =  Jcrop.attach('imgEdit');
+                const start = Jcrop.Rect.create(x_start,y_start,w_start,h_start);
+                const end = Jcrop.Rect.create(x_end,y_end,w_end,h_end);
+                jcrop.newWidget(start,{ aspectRatio: start.aspect });
+                jcrop.newWidget(end,{ aspectRatio: end.aspect });
+                $('.jcrop-widget').each(function(){
+                    if($(this).hasClass('active'))
+                        $(this).attr('id','end');
+                    else
+                         $(this).attr('id','start');
                 });
-                $('#formEffect').hide();
-                $('.gallery').hide();            
+                jcrop.listen('crop.update',function(widget,e){
+                    const pos = widget.pos ;
+                    if(document.getElementsByClassName('jcrop-widget active')[0].id == 'start'){
+                        $('#picture_effect_x_start').attr('value',pos.x);
+                        $('#picture_effect_y_start').attr('value',pos.y);
+                        $('#picture_effect_w_start').attr('value',pos.w);
+                        $('#picture_effect_h_start').attr('value',pos.h);
+                    }
+                    else if(document.getElementsByClassName('jcrop-widget active')[0].id == 'end'){
+                        $('#picture_effect_x_end').attr('value',pos.x);
+                        $('#picture_effect_y_end').attr('value',pos.y);
+                        $('#picture_effect_w_end').attr('value',pos.w);
+                        $('#picture_effect_h_end').attr('value',pos.h);
+                    }
+                });                      
             });
 
         });
