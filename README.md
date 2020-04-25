@@ -6,6 +6,7 @@
 # Pour tester le projet :
   - Activer l'extension "fileinfo" dans votre php.ini si ce n'est pas déjà fait => Ajouter la ligne "extension=php_fileinfo.dll"
   - Dans le projet faire un "composer require symfony/web-server-bundle --dev" ou un "composer require symfony/web-server-bundle --dev ^4.4.2" si testé avec synfony 5
+  - Dans le projet faire un "composer require vich/uploader-bundle"
   - Créer la base de données "slideproject" dans un phpmyadmin à l'aide du script présent dans le répertoire "public/database"
   
 # Fonctionnalités disponibles :
@@ -21,8 +22,8 @@
       
  # Fonctionnalités à venir :
    - A partir de la route /slide:
-      - amélioration du système pour la création de l'effet Ken Burns lors la création d'une slide
-      - amélioration de l'effet Ken Burns lors de la visualisation des slides
+      - amélioration du système pour la création de l'effet Ken Burns lors la création d'une slide (différenciation des deux zones)
+      - amélioration / correction de l'effet Ken Burns lors de la visualisation des slides
    - Amélioration du css
    
 
