@@ -105,4 +105,42 @@ class SlideController extends AbstractController
             'formEffect'=> $form->createView(),
         ]);
     }
+
+    /**
+    * @Route("slide/delete/{id}", name="slideDelete", requirements={"id"="\d+"})
+    */
+    public function delete(int $id, EntityManagerInterface $em):Response
+
+    {
+        //Récupération du l'id du Slide 
+        $slide = $em ->getRepository(Slide::class)->find($id);
+        $pictures_effects = [];
+
+        //Récupération des effets du slide avec l'id passé en paramètre 
+        $pictures_effects = $em ->getRepository(PictureEffect::class)->findBySlideId($slide->getId());
+        
+        foreach($pictures_effects as $picture_effect){
+            $em->remove($picture_effect);
+        }
+
+    
+        $em->remove($slide);
+        $em->flush();
+        
+        return $this->redirectToRoute('slideHome');
+    }
+
+    /**
+    * @Route("slide/{id}", name="slideShowId", requirements={"id"="\d+"})
+    */
+    public function showSlide(int $id, EntityManagerInterface $em):Response
+
+    {
+        $slide = $em ->getRepository(Slide::class)->find($id);
+        
+        
+        return $this->render('slide/slideModalDelete.html.twig',[
+            'slide' => $slide
+        ]);
+    }
 }

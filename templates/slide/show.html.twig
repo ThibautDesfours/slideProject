@@ -33,8 +33,9 @@
 {% endblock %}
 {% block body %}
     <div class="container">     
-        <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">{{slide.getTitleSlide()}}</h1>
-
+        <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">{{slide.getTitleSlide()}} <a class="fa fa-trash slideDelete" data-tooltip="show" data-target="{{path('slideShowId', { 'id': slide.getId() })}}" style="float:right" id="{{slide.getId()}}"></a>
+        </h1>
+        
 		<hr class="mt-2 mb-5">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -71,6 +72,12 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+         <!-- Modal Delete SLide -->
+		<div id="modalDeleteSlide" class="modal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content" id="modalContentDeleteSlide"></div>
+			</div>
+		</div>
     </div>    
 {% endblock %}
 {% block javascripts %}
@@ -85,6 +92,17 @@
             $('#btnNext').click(function(){
                  $('.carousel').carousel('next');
             });
+            $('.slideDelete').click(function () {
+            $('#modalDeleteSlide').modal();
+            // On récupère l'url depuis la propriété "Data-target" de la balise html a
+            url = $(this).attr('data-target');
+            // on fait un appel ajax vers l'action symfony qui nous renvoie la vue
+            $.get(url, function (data) { // on injecte le html dans la modale
+            $('#modalContentDeleteSlide').html(data);
+            // on ouvre la modale
+            $('#modalDeleteSlide').modal('open');
+        });
+        });
         });
     </script>
 {% endblock %}

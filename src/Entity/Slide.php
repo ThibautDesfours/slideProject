@@ -39,6 +39,7 @@ class Slide
      */
     private $picture_effects;
 
+
     public function __construct()
     {
         $this->picture_effects = new ArrayCollection();
