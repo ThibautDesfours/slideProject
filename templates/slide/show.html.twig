@@ -9,6 +9,7 @@
                 position:relative;
                 left:-{{picture_effect.x_start}}px;
                 top:-{{picture_effect.y_start}}px;
+                overflow:hidden;
             }
 
             #img{{loop.index}}{
@@ -22,6 +23,10 @@
                 }
                 5% {
                     opactity: 1;
+                }
+                95{
+                    transform: scale3d({{(picture_effect.w_start/picture_effect.w_end)*0.8}},{{(picture_effect.h_start/picture_effect.h_end)*0.8}},0) translate3d({{(picture_effect.x_start - picture_effect.x_end)*0.8}}px,{{(picture_effect.y_start - picture_effect.y_end)*0.8}}px,0px);
+                    opacity:1; 
                 }
                 100% {
                     transform: scale3d({{picture_effect.w_start/picture_effect.w_end}},{{picture_effect.h_start/picture_effect.h_end}},0) translate3d({{picture_effect.x_start - picture_effect.x_end}}px,{{picture_effect.y_start - picture_effect.y_end}}px,0px);
