@@ -22,7 +22,6 @@
       
  # Fonctionnalités à venir :
    - A partir de la route /slide:
-      - amélioration du système pour la création de l'effet Ken Burns lors la création d'une slide (différenciation des deux zones)
       - amélioration / correction de l'effet Ken Burns lors de la visualisation des slides
    - Amélioration du css
    
