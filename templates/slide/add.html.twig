@@ -2,7 +2,6 @@
 
 {% block title %}Slides{% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{asset('/css/slideAdd.css')}}">
 {% endblock %}
 {% block body %}
     <div class="container">
@@ -71,9 +70,9 @@
                 jcrop.newWidget(end,{ aspectRatio: end.aspect });
                 $('.jcrop-widget').each(function(){
                     if($(this).hasClass('active'))
-                        $(this).attr('id','end');
+                        $(this).attr('id','zoneEnd');
                     else
-                         $(this).attr('id','start');
+                         $(this).attr('id','zoneStart');
                 });
                 jcrop.listen('crop.update',function(widget,e){
                     const pos = widget.pos ;
