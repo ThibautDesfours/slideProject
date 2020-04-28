@@ -1,53 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Slides{% endblock %}
+{% block title %}Slides
+{% endblock %}
 
 {% block body %}
-   <div class="container">
+	<div class="container">
 
 		<h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Slides :</h1>
 
 		<hr class="mt-2 mb-5">
 
 		<div class="row text-center text-lg-left">
-                <div class="col-lg-3 col-md-4 col-6">
-                    <a data-target="{{ path('slideNew')}}" class="tooltipped modal-trigger btn right-align d-block mb-4 h-60" data-tooltip="voir">
-                        <img class="img-fluid img-thumbnail" src="{{asset('/pictures/icons/add.png')}}" alt="Ajouter une nouvelle slide">
-                    </a>                
-                </div>
-            {% for slide in slides %}
-                <div class="col-lg-3 col-md-4 col-6">
-                    <p><h4 class="font-weight-light text-center text-lg-left mt-4 mb-0">{{slide.title_slide}}</h4></p>
-                    <a href="slide/show/{{slide.id}}" class="d-block mb-4 h-60">
-                        <img class="img-fluid img-thumbnail" src="./pictures/{{slide.path_picture}}" alt="{{slide.name_picture}}">
-                    </a>      
-                     <h5 class="font-weight-light text-center text-lg-left mt-4 mb-0">Créé le {{slide.createdAt|date("m/d/Y")}}</h5>              
-                </div>
-            {% endfor %}
-        </div>
+			<div class="col-lg-3 col-md-4 col-6">
+				<a data-target="{{ path('slideNew')}}" class="tooltipped modal-trigger btn right-align d-block mb-4 h-60" data-tooltip="voir">
+					<img class="img-fluid img-thumbnail" src="{{asset('/pictures/icons/add.png')}}" alt="Ajouter une nouvelle slide">
+				</a>
+			</div>
+			{% for slide in slides %}
+				<div class="col-lg-3 col-md-4 col-6">
+					<div class="hovereffect">
+						<a href="slide/show/{{slide.id}}" class="d-block mb-4 h-60 ">
 
-        <div id="modalAjout" class="modal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                </div>
-            </div>
-        </div> 
+							<img class="img-thumbnail img-responsive info" src="./pictures/{{slide.path_picture}}" alt="{{slide.name_picture}}">
+							<div class="overlay">
+								<h2>{{slide.title_slide}} - {{slide.createdAt|date("m/d/Y")}}</h2>
+							</div>
+						</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
+		<div id="modalAjout" class="modal">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content"></div>
+			</div>
+		</div>
 	</div>
 {% endblock %}
 {% block javascripts %}
-    <script>
-        $(document).ready(function() {
-        $('.modal-trigger').click(function () {
-                $('.modal').modal();
-                url = $(this).attr('data-target');
-                $.get(url, function (data) {
-                    $('.modal-content').html(data);
-                    $('#modalAjout').modal('open');
+	<script>
+		$(document).ready(function () {
+$('.modal-trigger').click(function () {
+$('.modal').modal();
+url = $(this).attr('data-target');
+$.get(url, function (data) {
+$('.modal-content').html(data);
+$('#modalAjout').modal('open');
 
-                });
+});
 
-            })
+})
 
-        });
-    </script>
+});
+	</script>
 {% endblock %}
