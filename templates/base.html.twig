@@ -3,8 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">
+<<<<<<< HEAD
         <link rel="stylesheet" href="{{asset('/css/jquery.Jcrop.min.css')}}">
         <link rel="stylesheet" href="{{asset('/css/style.css')}}">
+=======
+        <link rel="stylesheet" href="https://unpkg.com/jcrop/dist/jcrop.css">
+>>>>>>> 44beacf0463dd5c36d03fcdbb7a5b69e835200d4
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>
             {% block title %}Générateur de slide
@@ -47,7 +51,7 @@
     </body>
     <footer>
         <script src="{{asset('js/jquery-3.4.1.min.js')}}"></script>
-        <script src="{{asset('js/jquery.Jcrop.min.js')}}"></script>
+        <script src="https://unpkg.com/jcrop"></script>
         <script src="{{asset('js/bootstrap.min.js')}}"></script>
         <script src="{{asset('js/bootstrap.bundle.min.js')}}"></script>
         {% block javascripts %}        {% endblock %}

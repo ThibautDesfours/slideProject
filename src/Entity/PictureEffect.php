@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PictureEffectRepository")
@@ -20,6 +21,10 @@ class PictureEffect
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Type(
+     *     type="float",
+     *     message="La valeur {{ value }} n'est pas une durée correcte."
+     * )
      */
     private $length_effect;
 
