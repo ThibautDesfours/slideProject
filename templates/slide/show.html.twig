@@ -5,12 +5,7 @@
     <style>
         {% for picture_effect in picture_effects %}
            
-            #imgContainer{{loop.index}} img{
-                position:relative;
-                left:-{{picture_effect.x_start}}px;
-                top:-{{picture_effect.y_start}}px;
-                overflow:hidden;
-            }
+            
 
             #img{{loop.index}}{
                 overflow:hidden;

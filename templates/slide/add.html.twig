@@ -76,13 +76,13 @@
                 });
                 jcrop.listen('crop.update',function(widget,e){
                     const pos = widget.pos ;
-                    if(document.getElementsByClassName('jcrop-widget active')[0].id == 'start'){
+                    if(document.getElementsByClassName('jcrop-widget active')[0].id == 'zoneStart'){
                         $('#picture_effect_x_start').attr('value',pos.x);
                         $('#picture_effect_y_start').attr('value',pos.y);
                         $('#picture_effect_w_start').attr('value',pos.w);
                         $('#picture_effect_h_start').attr('value',pos.h);
                     }
-                    else if(document.getElementsByClassName('jcrop-widget active')[0].id == 'end'){
+                    else if(document.getElementsByClassName('jcrop-widget active')[0].id == 'zoneEnd'){
                         $('#picture_effect_x_end').attr('value',pos.x);
                         $('#picture_effect_y_end').attr('value',pos.y);
                         $('#picture_effect_w_end').attr('value',pos.w);
